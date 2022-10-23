@@ -1,5 +1,6 @@
 package junit5Tests;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class FirstTestClass {
@@ -13,6 +14,7 @@ public class FirstTestClass {
     }
 
     @Test
+    @DisplayName("US1234 - TC12 - this method is the second one")
     void secondMethod(){
         System.out.println("This is the second test method");
     }
