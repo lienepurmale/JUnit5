@@ -99,13 +99,10 @@ public class ParameterizedTests {
     }
 
     @ParameterizedTest
-    @MethodSource(value="sourceStream_StringDouble")
+    @MethodSource(value="junit5Tests.ParamProvider#sourceStream_StringDouble")
     void methodSource_StringDoubleStream(String param1, double param2){
         System.out.println("param1 = " + param1 + ", param2 = " + param2);
     }
 
-    Stream<Arguments> sourceStream_StringDouble(){
-        return Stream.of(arguments("apple", 9.2), arguments("banana" , 2.7));
-    }
 
 }
