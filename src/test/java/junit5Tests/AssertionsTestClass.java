@@ -1,13 +1,19 @@
 package junit5Tests;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.List;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.Map;
 
+import static java.util.Arrays.asList;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AssertionsTestClass {
@@ -19,8 +25,8 @@ public class AssertionsTestClass {
 
     @Test
     void assertEqualsListTest() {
-        List<String> expectedValues = Arrays.asList("first string", "second string", "third string");
-        List<String> actualValues = Arrays.asList("first string", "second string");
+        List<String> expectedValues = asList("first string", "second string", "third string");
+        List<String> actualValues = asList("first string", "second string");
         assertEquals(expectedValues, actualValues);
     }
 
@@ -51,4 +57,33 @@ public class AssertionsTestClass {
         );
     }
 
+    @Test
+    void assertForMapTest() {
+        Map<String, Integer> theMap = new HashMap<>();
+        theMap.put("firstKey", 1);
+        theMap.put("secondKey", 2);
+        theMap.put("thirdKey", 3);
+
+        assertThat(theMap, hasKey("secondKey"));
+        assertThat(theMap, hasValue(3));
+    }
+
+    @Test
+    void assertForList() {
+        List<String> theList = asList("firstString", "secondString", "thirdString");
+
+        assertThat(theList, hasItem("thirdString"));
+    }
+
+    @Test
+    void assertForAnyOf() {
+        List<String> theList = asList("firstString", "secondString", "thirdString");
+        assertThat(theList, anyOf(hasItem("thirdString"), hasItem("noString")));
+    }
+
+    @Test
+    void assertForContainsAnyOrder() {
+        List<String> theList = asList("firstString", "secondString", "thirdString");
+        assertThat(theList, containsInAnyOrder("firstString", "thirdString", "secondString"));
+    }
 }
